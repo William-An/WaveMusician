@@ -1,8 +1,9 @@
 import dwf
 import time
+import sys
 from mido import MidiFile
 from musicConstants import NOTES_FREQ
-from midi2cmd import MidiFileParser
+from midi2Cmd import MidiFileParser
 
 ##
 # 
@@ -15,7 +16,10 @@ from midi2cmd import MidiFileParser
 #
 ##
 
-# TODO Support cmdline args for config
+# TODO Support more cmdline args for config
+midiFileName = sys.argv[1]
+
+
 OUTPUT_NODE_TYPE = dwf.DwfAnalogOut.NODE.CARRIER  # Output node type
 
 # Connect to device
@@ -23,7 +27,7 @@ print("Connecting to first device found...")
 dwf_ao = dwf.DwfAnalogOut()
 print("Device connected")
 
-mid = MidiFile('../Resources/MIDI_samples/Alan_Walker_Fade.mid')
+mid = MidiFile(midiFileName)
 print("Playing: %s" % mid.filename)
 loader = MidiFileParser(mid)
 
