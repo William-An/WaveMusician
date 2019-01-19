@@ -11,7 +11,8 @@ For Analog Discovery 2
 1. Download [WaveForms SDK](https://store.digilentinc.com/waveforms-previously-waveforms-2015/)
 1. Clone this repo
 1. Go to repo directory and install required packages `pip install -r requirements.txt`
-1. `python WaveForms/main.py`
+1. `cd WaveForms/`
+1. `python WaveForms/main.py DIR_TO_MIDI_FILES`
 
 ## TODO
 1. [x] Tick support
