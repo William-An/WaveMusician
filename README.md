@@ -1,7 +1,9 @@
 # Music Wave
-Use wave generators to play music
+- Use wave generators to play music
+- Currently only support WaveForms devices
+- Tested on analog discovery 2
 
-## SCPI
+## ~~SCPI~~
 For function generators supporting SCPI commands
 
 ## WaveForms
@@ -10,46 +12,57 @@ For Analog Discovery 2
 ### How to (Prototype)
 1. Download [WaveForms SDK](https://store.digilentinc.com/waveforms-previously-waveforms-2015/)
 1. Clone this repo
+1. Get some [midi files!](https://musescore.com)
 1. Go to repo directory and install required packages `pip install -r requirements.txt`
 1. `cd WaveForms/`
 1. `python WaveForms/main.py DIR_TO_MIDI_FILES`
 
 ## TODO
-1. [x] Tick support
-1. [ ] MIDI support
-	1. [x] MIDI File load
-		1. Load midi file using mido
-		1. Identify [file format](https://www.csie.ntu.edu.tw/~r92092/ref/midi/)
-			1. Format 0
-			1. Format 1
-				If there are more than 2 tracks (one header chunk and one music tracks), prompt warning
-			1. Format 2
-		1. Parse header
-			1. Tick info
-			1. Beat info
-			1. tempo info
-			1. time signature
-			1. etc.
-		1. Parse music track
-			1. Instrument to wave form
-			1. Volume control
-			1. Note to frequency
-			1. Tick to time
-	1. [x] Complie waveform from loader
-	1. [x] "Run" Music 
-		1. Set timer triggers?
-		1. Or send real-time  
-	1. [ ] Concurrence problem
-		1. SuperPosition
-	1. Instrument 
-		1. Ramp is like trumpet
-1. [ ] SCPI support
-1. [ ] Command line configuration
-1. [x] Load music sheet from files
-1. [ ] Create unified interface for WaveForms and SCPI, wrapping the lower level command
-	1. [x] MIDI Loader
-1. [ ] Package cmd tools
-	1. Play from cmd
+1. [ ] Package design / Directory Structure
+	- Make this a package
+	- WaveMusician 
+		- resources
+			- MIDI Files
+			- MusicXML Files
+			- MP3 Files
+			- Other music format
+		- src
+			- Loader
+				- Abstract Loader
+				- MIDI File Loader
+				- MusicXML Loader
+				- MP3 Loader
+				- KeyboardInput Loader
+					- Play from keyboard
+			- WaveGenerator 
+				- Abstract WaveGenerator
+					- Unified interface for wave generator
+				- (Different kinds of wave generator that implement the api interface, i.e. transform loader info into generator commands)
+				- SCPI Devices
+				- WaveForms
+				- Other wave generator
+		- examples
+			- Sample code
+		- setup.py
+		- and other package installation files
+1. [ ] Unified note message data structure design
+	1. Track message for wave generator
+		1. Wave Channel
+		1. Wave Function
+			1. Wave data, for custom wave
+		1. Wave Amplitude
+		1. Wave Frequency
+		1. Wave Phase
+		1. Wave Offset
+1. [ ] Multiple Notes Support
+	1. Preprocess input track? to calculate custom waves
+	1. Real-time solution
+		1. Superposition
+1. [ ] Instrument Style
+	1. Generator waves similar to instrument indicated in music files
+1. [ ] Better Command Line Tools
+	1. Configuration
+	1. File dir
 
 ## info
 - WaveForms
